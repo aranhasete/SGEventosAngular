@@ -1,0 +1,32 @@
+<p>evento-item-list works!</p>
+
+<h1>Evento Itens</h1>
+
+<p *ngIf="!(eventoItems$ | async)"><em>Loading...</em></p>
+<p>
+  <a [routerLink]="['/add']" class="btn btn-primary float-right mb-3">New Evento Item</a>
+</p>
+
+<table class="table table-sm table-hover" *ngIf="(eventoItems$ | async)?.length>0">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Title</th>
+      <th>Creator</th>
+      <th>Date</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let eventoItem of (eventoItems$ | async)">
+      <td>{{ eventoItem.eventoItemId }}</td>
+      <td><a [routerLink]="['/eventoitem/', eventoItem.eventoItemId]">{{ eventoItem.Name }}</a></td>
+      <!-- <td>{{ eventoItem.creator }}</td>
+      <td>{{ eventoItem.dt | date: "dd.MM.y" }}</td> -->
+      <td><a [routerLink]="['/eventoitem/edit/', eventoItem.eventoItemId]" class="btn btn-primary btn-sm float-right">Edit</a>
+      </td>
+      <td><a [routerLink]="" (click)="delete(eventoItem.eventoItemId)" class="btn btn-danger btn-sm float-right">Delete</a></td>
+    </tr>
+  </tbody>
+</table>
